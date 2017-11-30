@@ -23,7 +23,9 @@ class PackageParser
     end
     
     def update_authors(package, hash_description)
-      puts "Author: #{hash_description['Author']}"
+      authors = hash_description['Author']
+      puts authors
+      puts authors.gsub(/\[[^\]]*\]/, '').split(', ')
     end
     def update_maintainers(package, hash_description)
       puts "Maintainer: #{hash_description['Maintainer']}"
