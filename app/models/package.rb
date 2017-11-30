@@ -10,4 +10,8 @@ class Package < ApplicationRecord
   def latest_version
     versions.last.version
   end
+  
+  def tmp_file
+    "/tmp/#{name}.tar.gz"
+  end
 end
