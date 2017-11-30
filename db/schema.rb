@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171130201313) do
+ActiveRecord::Schema.define(version: 20171130204503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,13 +42,24 @@ ActiveRecord::Schema.define(version: 20171130201313) do
   end
 
   create_table "packages", force: :cascade do |t|
-    t.string "name"
-    t.date "published_at"
+    t.string "name", null: false
     t.string "title"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_packages_on_name"
+    t.index ["title"], name: "index_packages_on_title"
   end
 
+  create_table "versions", force: :cascade do |t|
+    t.bigint "package_id"
+    t.string "version", null: false
+    t.date "published_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["package_id"], name: "index_versions_on_package_id"
+    t.index ["version"], name: "index_versions_on_version"
+  end
+
+  add_foreign_key "versions", "packages"
 end

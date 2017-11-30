@@ -1,8 +1,7 @@
 class CreatePackages < ActiveRecord::Migration[5.1]
   def change
     create_table :packages do |t|
-      t.string :name
-      t.date :published_at
+      t.string :name, null: false
       t.string :title
       t.string :description
 
@@ -30,5 +29,6 @@ class CreatePackages < ActiveRecord::Migration[5.1]
     end
 
     add_index :packages, :name
+    add_index :packages, :title
   end
 end
