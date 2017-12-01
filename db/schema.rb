@@ -17,8 +17,6 @@ ActiveRecord::Schema.define(version: 20171130204503) do
 
   create_table "authors", force: :cascade do |t|
     t.string "name"
-    t.string "email"
-    t.index ["email"], name: "index_authors_on_email"
   end
 
   create_table "authors_packages", force: :cascade do |t|

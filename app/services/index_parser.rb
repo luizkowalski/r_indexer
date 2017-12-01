@@ -8,7 +8,7 @@ class IndexParser
       parsed_packages = parse(package)
       parsed_packages.each do |p|
         package = Package.find_or_create_by(name: p['Package'])
-        PackageParser.parse(package, p['Version'])
+        PackageParserJob.perform_async(package.id, p['Version'])
       end
     end
 

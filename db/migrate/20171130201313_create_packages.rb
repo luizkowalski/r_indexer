@@ -10,7 +10,6 @@ class CreatePackages < ActiveRecord::Migration[5.1]
 
     create_table :authors do |t|
       t.string :name
-      t.string :email, index: true
     end
 
     create_table :maintainers do |t|

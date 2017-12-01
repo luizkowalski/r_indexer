@@ -1,0 +1,3 @@
+my_other_scheduled_job:
+  class: IndexerJob
+  cron: "0 12 * * *"
