@@ -25,6 +25,7 @@ group :development, :test do
   gem 'database_rewinder'
   gem 'vcr'
   gem 'webmock'
+  gem 'simplecov'
 end
 
 group :development do
