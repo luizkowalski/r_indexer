@@ -20,6 +20,11 @@ gem 'sidecloq'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'rspec-rails', '~> 3.6'
+  gem 'factory_bot_rails'
+  gem 'database_rewinder'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :development do
