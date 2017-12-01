@@ -12,26 +12,26 @@ describe PackageParser do
 
       it 'version should be processed' do
         VCR.use_cassette('package_parser/parse') do
-        expect do
-          subject
-        end.to change { version.reload.processed? }
+          expect do
+            subject
+          end.to change { version.reload.processed? }
+        end
       end
-      end
-      
+
       it 'package should have author' do
         VCR.use_cassette('package_parser/parse') do
-        expect do
-          subject
-        end.to change { package.authors.count }
+          expect do
+            subject
+          end.to change { package.authors.count }
+        end
       end
-      end
-      
+
       it 'package should have maintainer' do
         VCR.use_cassette('package_parser/parse') do
-        expect do
-          subject
-        end.to change { package.maintainers.count }
-      end
+          expect do
+            subject
+          end.to change { package.maintainers.count }
+        end
       end
     end
 
@@ -44,10 +44,18 @@ describe PackageParser do
 
       it 'it should create a new version for the package' do
         VCR.use_cassette('package_parser/parse') do
-        expect do
-          subject
-        end.to change { package.versions.count }
+          expect do
+            subject
+          end.to change { package.versions.count }
+        end
       end
+
+      it 'it should have a new latest_version' do
+        VCR.use_cassette('package_parser/parse') do
+          expect do
+            subject
+          end.to change { package.reload.latest_version }
+        end
       end
     end
   end
