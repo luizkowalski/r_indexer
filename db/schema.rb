@@ -21,24 +21,26 @@ ActiveRecord::Schema.define(version: 20171130204503) do
     t.index ["email"], name: "index_authors_on_email"
   end
 
+  create_table "authors_maintainers", force: :cascade do |t|
+    t.bigint "package_id"
+    t.bigint "maintainer_id"
+    t.index ["maintainer_id"], name: "index_authors_maintainers_on_maintainer_id"
+    t.index ["package_id", "maintainer_id"], name: "index_authors_maintainers_on_package_id_and_maintainer_id", unique: true
+    t.index ["package_id"], name: "index_authors_maintainers_on_package_id"
+  end
+
+  create_table "authors_packages", force: :cascade do |t|
+    t.bigint "package_id"
+    t.bigint "author_id"
+    t.index ["author_id"], name: "index_authors_packages_on_author_id"
+    t.index ["package_id", "author_id"], name: "index_authors_packages_on_package_id_and_author_id", unique: true
+    t.index ["package_id"], name: "index_authors_packages_on_package_id"
+  end
+
   create_table "maintainers", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.index ["email"], name: "index_maintainers_on_email"
-  end
-
-  create_table "package_authors", force: :cascade do |t|
-    t.bigint "package_id"
-    t.bigint "author_id"
-    t.index ["author_id"], name: "index_package_authors_on_author_id"
-    t.index ["package_id"], name: "index_package_authors_on_package_id"
-  end
-
-  create_table "package_maintainers", force: :cascade do |t|
-    t.bigint "package_id"
-    t.bigint "maintainer_id"
-    t.index ["maintainer_id"], name: "index_package_maintainers_on_maintainer_id"
-    t.index ["package_id"], name: "index_package_maintainers_on_package_id"
   end
 
   create_table "packages", force: :cascade do |t|

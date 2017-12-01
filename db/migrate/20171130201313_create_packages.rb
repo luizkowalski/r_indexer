@@ -18,17 +18,20 @@ class CreatePackages < ActiveRecord::Migration[5.1]
       t.string :email, index: true
     end
 
-    create_table :package_authors do |t|
+    create_table :authors_packages do |t|
       t.references :package, index: true
       t.references :author, index: true
     end
 
-    create_table :package_maintainers do |t|
+    create_table :authors_maintainers do |t|
       t.references :package, index: true
       t.references :maintainer, index: true
     end
 
     add_index :packages, :name
     add_index :packages, :title
+    
+    add_index :authors_packages,    [:package_id, :author_id],     unique: true
+    add_index :authors_maintainers, [:package_id, :maintainer_id], unique: true
   end
 end

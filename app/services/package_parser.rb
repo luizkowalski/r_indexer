@@ -4,16 +4,19 @@ require 'dcf'
 
 # reload! && PackageParser.parse(Package.last, Package.last.latest_version)
 class PackageParser
+  AUTHORS_REGEX = /\[[^\]]*\]/ # remove [] from authors list
   class << self
     def parse(package, ver)
       version = Version.find_or_create_by(package: package, version: ver)
       # return Rails.logger.info "Version already processed" if version.processed?
-      download_file(package)
+      package.download
       hash_description = read_desc_file(package)
-      # update_package(package, hash_description)
-      # update_version(version, hash_description)
+
+      update_package(package, hash_description)
+      update_version(version, hash_description)
       update_authors(package, hash_description)
       update_maintainers(package, hash_description)
+      package.save!
     end
     
     private
@@ -24,8 +27,11 @@ class PackageParser
     
     def update_authors(package, hash_description)
       authors = hash_description['Author']
-      puts authors
-      puts authors.gsub(/\[[^\]]*\]/, '').split(', ')
+      authors_array = authors.gsub(AUTHORS_REGEX, '').split(', ')
+      authors_array.each do |a|
+        author = Author.find_or_create_by(name: a)
+        package.authors << author
+      end
     end
     def update_maintainers(package, hash_description)
       puts "Maintainer: #{hash_description['Maintainer']}"
@@ -33,11 +39,6 @@ class PackageParser
     
     def update_version(version, hash_description)
       version.update published_at: hash_description['Date/Publication']
-    end
-    
-    def download_file(package)
-      source = open(package.external_address)
-      IO.copy_stream(source, package.tmp_file)
     end
     
     def read_desc_file(package)
