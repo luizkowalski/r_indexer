@@ -2,7 +2,7 @@ class Package < ApplicationRecord
   include Downloadable
 
   has_and_belongs_to_many :authors
-  has_and_belongs_to_many :maintainer
+  has_and_belongs_to_many :maintainers
   has_many :versions
   
   def external_address
