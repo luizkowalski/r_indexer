@@ -18,5 +18,20 @@ describe PackageParser do
         end
       end
     end
-  end
+
+    context 'a new version from an existing package' do
+      let(:package) { create(:package, :with_old_version) }
+      let(:new_version) { '1.0.0' }
+      subject do
+        described_class.parse(package, ver)
+      end
+
+      it 'version should be processed' do
+        VCR.use_cassette('package_parser/package') do
+          expect do
+            subject
+          end.to change { version.reload.processed? }
+        end
+      end
+    end
 end
