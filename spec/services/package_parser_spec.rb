@@ -11,11 +11,21 @@ describe PackageParser do
       end
 
       it 'version should be processed' do
-        VCR.use_cassette('package_parser/package') do
-          expect do
-            subject
-          end.to change { version.reload.processed? }
-        end
+        expect do
+          subject
+        end.to change { version.reload.processed? }
+      end
+      
+      it 'package should have author' do
+        expect do
+          subject
+        end.to change { package.authors.count }
+      end
+      
+      it 'package should have maintainer' do
+        expect do
+          subject
+        end.to change { package.maintainers.count }
       end
     end
 
@@ -23,15 +33,14 @@ describe PackageParser do
       let(:package) { create(:package, :with_old_version) }
       let(:new_version) { '1.0.0' }
       subject do
-        described_class.parse(package, ver)
+        described_class.parse(package, new_version)
       end
 
-      it 'version should be processed' do
-        VCR.use_cassette('package_parser/package') do
-          expect do
-            subject
-          end.to change { version.reload.processed? }
-        end
+      it 'it should create a new version for the package' do
+        expect do
+          subject
+        end.to change { package.versions.count }
       end
     end
+  end
 end
