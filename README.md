@@ -40,7 +40,7 @@ maintainer, etc..)
 
 ## Code
 
-* I like to keep controllers slim, keeping as few as possible business logic
+* I like to keep controllers slim, having as few as possible business logic
 inside them
 * Same goes for Sidekiq workers
 * I'm a big fan o DDD so I like to keep the business logic as close to the model
