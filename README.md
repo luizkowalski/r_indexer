@@ -29,7 +29,7 @@ Sidekiq (or start the app with `foreman start`) to bootstrap.
 ## Assumptions
 
 * `PACKAGE` file contains no comments (e.g. line starting with #)
-* every package contains a DESCRIPTION file
+* every package contains a `DESCRIPTION` file
 * every description file always contains all information needed (authors,
 maintainer, etc..)
 
@@ -42,7 +42,7 @@ inside them
  as possible (although I decided not to implement DDD here since I would spend
 too much time)
 * Tried to apply Single responsibility principle: A class should have only one
-reason to change. Thats why there are `queries` and `presenter`. Though some
+reason to change. Thats why there are `queries` and `presenters`. Though some
 people believe a class should have only one method in order to respect the
 principle, the granularity level is always subjective.
 
