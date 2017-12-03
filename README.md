@@ -29,6 +29,8 @@ Sidekiq (or start the app with `foreman start`) to bootstrap.
 
 `bundle exec rspec spec/`
 
+Code coverage is around 99.31%
+
 ## Assumptions
 
 * `PACKAGE` file contains no comments (e.g. line starting with #)
