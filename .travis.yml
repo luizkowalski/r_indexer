@@ -2,8 +2,11 @@ language: ruby
 rvm:
   - 2.4.2
 
-before_install:
-  - "export RAILS_ENV=test"
+env:
+  - "RAILS_ENV=test"
+
+services:
+  - redis-server
 
 script:
   - bundle exec rails db:create db:migrate

@@ -1,5 +1,8 @@
 # R Indexer
 
+[![Build
+Status](https://travis-ci.org/luizkowalski/r_indexer.svg?branch=master)](https://travis-ci.org/luizkowalski/r_indexer)
+
 This app will download PACKAGE file from a R packages repository, index at least
 50 packages and present
 
