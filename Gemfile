@@ -29,6 +29,7 @@ group :development, :test do
   gem 'vcr'
   gem 'webmock'
   gem 'simplecov'
+  gem 'rails-controller-testing'
 end
 
 group :development do
